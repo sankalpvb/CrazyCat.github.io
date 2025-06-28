@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,11 +11,27 @@
   <meta property="og:description" content="Cybersecurity Enthusiast | Terminal Portfolio">
   <meta property="og:image" content="preview.png">
   <meta property="og:type" content="website">
-  <meta name="description" content="Terminal-style portfolio of Sankalp Bhosale, Cybersecurity Enthusiast.">
+  <!-- Meta SEO -->
+  <meta name="description" content="Sankalp Bhosale - Aspiring Cybersecurity Professional's Portfolio">
+  <meta name="keywords" content="cybersecurity, ethical hacking, red teaming, student, developer, portfolio">
   <meta name="author" content="Sankalp Bhosale">
-  <meta property="og:image" content="preview.png">
-  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Sankalp Bhosale | Cybersecurity Portfolio" />
+  <meta property="og:description"
+    content="Explore my terminal-style portfolio showcasing my cybersecurity skills and projects." />
+  <meta property="og:image" content="https://sankalpvb.github.io/CrazyCat.github.io/assets/preview.png" />
+  <meta property="og:url" content="https://sankalpvb.github.io/CrazyCat.github.io/" />
+  <meta property="og:type" content="website" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Sankalp Bhosale | Portfolio" />
+  <meta name="twitter:description" content="Check out my cool terminal-inspired cybersecurity portfolio!" />
+  <meta name="twitter:image" content="https://sankalpvb.github.io/CrazyCat.github.io/assets/preview.png" />
+
 </head>
+
 <body>
   <div class="custom-cursor" id="cursor"></div>
   <div id="progressBar"></div>
@@ -35,32 +52,61 @@
     </nav>
   </header>
 
-  <div class="container">
-    <section class="section" id="about">
-      <h2>About Me</h2>
-      <p>$ whoami<br>Sankalp Bhosale</p>
-      <p class="type-line" id="aboutText"></p><span class="cursor">█</span>
-    </section>
+  <div class="content-wrapper">
+    <!-- LEFT SIDEBAR -->
+    <aside class="skill-box left-box section reveal">
+      <h3>> Known Languages</h3>
+      <ul>
+        <li>Python</li>
+        <li>Java</li>
+        <li>HTML/CSS</li>
+        <li>JavaScript</li>
+        <li>SQL</li>
 
-    <section class="section" id="resume">
-      <h2>Resume</h2>
-      <p>Click the button below to view or download my resume.</p>
-      <a href="resume.pdf" class="btn" target="_blank">View Resume</a>
-    </section>
+      </ul>
+    </aside>
 
-    <section class="section" id="contact">
-      <h2>Contact</h2>
-      <p>Email: sankalpbhosale9552@gmail.com.com</p>
-      <p>GitHub: <a href="https://github.com/yourusername" target="_blank">github.com/sankalpvb</a></p>
-      <p>LinkedIn: <a href="https://linkedin.com/in/yourusername" target="_blank">linkedin.com/in/yourusername</a></p>
-    </section>
+    <!-- MAIN CONTENT -->
+    <main class="main-section">
+
+      <section class="section" id="about">
+        <h2>About Me</h2>
+        <p>$ whoami<br>Sankalp Bhosale</p>
+        <p class="type-line" id="aboutText"></p><span class="cursor">█</span>
+      </section>
+
+      <section class="section" id="resume">
+        <h2>Resume</h2>
+        <p>Click the button below to view or download my resume.</p>
+        <a href="resume.pdf" class="btn" target="_blank">View Resume</a>
+      </section>
+
+      <section class="section" id="contact">
+        <h2>Contact</h2>
+        <p>Email: yourname@example.com</p>
+        <p>GitHub: <a href="https://github.com/yourusername" target="_blank">github.com/yourusername</a></p>
+        <p>LinkedIn: <a href="https://linkedin.com/in/yourusername" target="_blank">linkedin.com/in/yourusername</a></p>
+      </section>
+    </main>
+
+    <!-- RIGHT SIDEBAR -->
+    <aside class="skill-box right-box">
+      <h3>> Cyber Skills</h3>
+      <ul>
+        <li>SQL Injection</li>
+        <li>Burp Suite</li>
+        <li>Wireshark</li>
+        <li>Metasploit</li>
+        <li>Nmap</li>
+        <!--<li>Privilege Escalation</li> -->
+      </ul>
+    </aside>
   </div>
-
   <footer>
     <p>&copy; 2025 Sankalp Bhosale. All rights reserved.</p>
   </footer>
-
   <audio id="typeSound" src="https://assets.mixkit.co/active_storage/sfx/2333/2333-preview.mp3" preload="auto"></audio>
   <script src="script.js"></script>
 </body>
+
 </html>
