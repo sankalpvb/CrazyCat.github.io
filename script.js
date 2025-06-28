@@ -95,3 +95,20 @@ document.addEventListener("keydown", () => {
   typeSound.currentTime = 0;
   typeSound.play();
 });
+const sections = document.querySelectorAll('.section');
+
+function revealOnScroll() {
+  sections.forEach(section => {
+    const rect = section.getBoundingClientRect();
+    if (rect.top < window.innerHeight - 100) {
+      section.classList.add('reveal');
+
+      // Optional: play sound when section is revealed
+      const beep = new Audio("assets/section.wav");
+      beep.volume = 0.2;
+      beep.play();
+    }
+  });
+}
+
+window.addEventListener('scroll', revealOnScroll);
