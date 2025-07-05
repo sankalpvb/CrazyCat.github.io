@@ -244,7 +244,10 @@ footer {
   .main-section {
     flex: 1;
     max-width: 700px;
+    margin: 0 auto; /* Centers the section horizontally */
+    padding: 20px;   /* Optional: adds spacing inside for better visuals */
   }
+  
   
   /* Responsive: stack on smaller devices */
   @media screen and (max-width: 900px) {
@@ -318,3 +321,110 @@ footer {
     opacity: 1;
     transform: translateY(0);
   }
+  .section-wrapper {
+    display: flex;
+    margin: 40px auto;
+    max-width: 1200px;
+    color: #00ff99;
+  }
+  
+  .sidebar {
+    width: 250px;
+    padding: 20px;
+    border-right: 1px solid #00ff99;
+  }
+  
+  .main-content {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  .section-title {
+    font-weight: bold;
+    font-size: 18px;
+    margin: 20px 0 10px;
+    color: #00ffcc;
+  }
+  
+  ul {
+    list-style-type: square;
+    padding-left: 20px;
+  }
+  .sidebar,
+  .main-content {
+    padding: 20px;
+    background: rgba(0, 255, 200, 0.05);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(0, 255, 200, 0.3);
+    border-radius: 10px;
+    margin: 0 10px; /* Adds spacing between the two */
+  }
+  .sidebar {
+    flex: 0.5;
+  }
+  .main-content {
+    flex: 1.5;
+  }
+  .outer-frame {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.card {
+  padding: 20px;
+  background: rgba(0, 255, 200, 0.06);
+  border: 1px solid rgba(0, 255, 200, 0.3);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 15px rgba(0, 255, 200, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 25px rgba(0, 255, 200, 0.4);
+}
+
+.section-title {
+  font-size: 20px;
+  color: #00ffcc;
+  margin-bottom: 10px;
+  border-left: 4px solid #00ffcc;
+  padding-left: 10px;
+  text-shadow: 0 0 5px #00ffcc;
+}
+
+ul {
+  list-style-type: square;
+  padding-left: 20px;
+}
+.custom-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  grid-template-rows: auto auto;
+}
+
+/* Top Row */
+.skills {
+  grid-column: span 1;
+}
+.projects {
+  grid-column: span 2;
+}
+
+/* Bottom Row */
+.certs {
+  grid-column: span 2;
+}
+.languages {
+  grid-column: span 1;
+}

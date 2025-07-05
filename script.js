@@ -32,7 +32,7 @@ function typeWriter() {
   }
 }
 
-const aboutText = "I’m a student passionate about cybersecurity, networking, and software development. I love solving real-world problems and experimenting with new tools and technologies.";
+const aboutText = "Detail-oriented cybersecurity intern with hands-on experience in red teaming, scripting, and offensive security. Creator of BruteMaster, a Bash and Python-based modular brute-force framework. Completed over 20 CTFs and labs focused on web vulnerabilities, authentication bypass, and exploitation. Seeking to leverage project-based learning and technical capabilities to grow in a cybersecurity internship role.";
 let j = 0;
 function typeAbout() {
   if (j < aboutText.length) {

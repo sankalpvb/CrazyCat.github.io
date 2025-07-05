@@ -52,61 +52,63 @@
     </nav>
   </header>
 
-  <div class="content-wrapper">
-    <!-- LEFT SIDEBAR -->
-    <aside class="skill-box left-box section reveal">
-      <h3>> Known Languages</h3>
-      <ul>
-        <li>Python</li>
-        <li>Java</li>
-        <li>HTML/CSS</li>
-        <li>JavaScript</li>
-        <li>SQL</li>
+  <!-- MAIN CONTENT -->
+  <main class="main-section">
 
-      </ul>
-    </aside>
-
-    <!-- MAIN CONTENT -->
-    <main class="main-section">
-
-      <section class="section" id="about">
-        <h2>About Me</h2>
-        <p>$ whoami<br>Sankalp Bhosale</p>
-        <p class="type-line" id="aboutText"></p><span class="cursor">█</span>
-      </section>
-
-      <section class="section" id="resume">
-        <h2>Resume</h2>
-        <p>Click the button below to view or download my resume.</p>
-        <a href="resume.pdf" class="btn" target="_blank">View Resume</a>
-      </section>
-
-      <section class="section" id="contact">
-        <h2>Contact</h2>
-        <p>Email: yourname@example.com</p>
-        <p>GitHub: <a href="https://github.com/yourusername" target="_blank">github.com/yourusername</a></p>
-        <p>LinkedIn: <a href="https://linkedin.com/in/yourusername" target="_blank">linkedin.com/in/yourusername</a></p>
-      </section>
-    </main>
-
-    <!-- RIGHT SIDEBAR -->
-    <aside class="skill-box right-box">
-      <h3>> Cyber Skills</h3>
-      <ul>
-        <li>SQL Injection</li>
-        <li>Burp Suite</li>
-        <li>Wireshark</li>
-        <li>Metasploit</li>
-        <li>Nmap</li>
-        <!--<li>Privilege Escalation</li> -->
-      </ul>
-    </aside>
+    <section class="section" id="about">
+      <h2>About Me</h2>
+      <p>$ whoami<br>Sankalp Bhosale</p>
+      <p class="type-line" id="aboutText"></p><span class="cursor">█</span>
+    </section>
+  </main>
   </div>
-  <footer>
-    <p>&copy; 2025 Sankalp Bhosale. All rights reserved.</p>
-  </footer>
-  <audio id="typeSound" src="https://assets.mixkit.co/active_storage/sfx/2333/2333-preview.mp3" preload="auto"></audio>
-  <script src="script.js"></script>
+  <div class="outer-frame">
+    <div class="custom-grid">
+      
+      <!-- Top Row -->
+      <div class="card skills">
+        <div class="section-title">> Skills</div>
+        <ul>
+          <li>SQL Injection</li>
+          <li>Burp Suite</li>
+          <li>Wireshark</li>
+          <li>Metasploit</li>
+          <li>Nmap</li>
+        </ul>
+      </div>
+  
+      <div class="card projects">
+        <div class="section-title">> Projects</div>
+        <p>BruteMaster – A modular brute-force tool using Bash and Python...</p>
+      </div>
+  
+      <!-- Bottom Row -->
+      <div class="card certs">
+        <div class="section-title">> Certificates</div>
+        <p>Cybersecurity Fundamentals – IBM, Web Pentesting – TryHackMe, etc.</p>
+      </div>
+  
+      <div class="card languages">
+        <div class="section-title">> Languages</div>
+        <ul>
+          <li>Python</li>
+          <li>Java</li>
+          <li>HTML/CSS</li>
+          <li>JavaScript</li>
+          <li>SQL</li>
+        </ul>
+      </div>
+  
+    </div>
+  </div>
+  
+  
+    <footer>
+      <p>&copy; 2025 Sankalp Bhosale. All rights reserved.</p>
+    </footer>
+    <audio id="typeSound" src="https://assets.mixkit.co/active_storage/sfx/2333/2333-preview.mp3"
+      preload="auto"></audio>
+    <script src="script.js"></script>
 </body>
 
 </html>
