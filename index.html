@@ -64,7 +64,7 @@
   </div>
   <div class="outer-frame">
     <div class="custom-grid">
-      
+
       <!-- Top Row -->
       <div class="card skills">
         <div class="section-title">> Skills</div>
@@ -75,19 +75,20 @@
           <li>Metasploit</li>
           <li>Nmap</li>
         </ul>
+
       </div>
-  
+
       <div class="card projects">
         <div class="section-title">> Projects</div>
         <p>BruteMaster – A modular brute-force tool using Bash and Python...</p>
       </div>
-  
+
       <!-- Bottom Row -->
       <div class="card certs">
         <div class="section-title">> Certificates</div>
         <p>Cybersecurity Fundamentals – IBM, Web Pentesting – TryHackMe, etc.</p>
       </div>
-  
+
       <div class="card languages">
         <div class="section-title">> Languages</div>
         <ul>
@@ -98,17 +99,99 @@
           <li>SQL</li>
         </ul>
       </div>
-  
+    </div>
+    <div class="preview-panel" id="previewPanel">
+      <h3 id="previewTitle">Click on a section to view images</h3>
+      <div class="image-container" id="previewImages">
+      </div>
     </div>
   </div>
-  
-  
-    <footer>
-      <p>&copy; 2025 Sankalp Bhosale. All rights reserved.</p>
-    </footer>
-    <audio id="typeSound" src="https://assets.mixkit.co/active_storage/sfx/2333/2333-preview.mp3"
-      preload="auto"></audio>
-    <script src="script.js"></script>
+  <!-- Lightbox Modal with Navigation -->
+  <div id="imageModal" onclick="closeModal()">
+    <button id="prevBtn" onclick="event.stopPropagation(); navigate(-1)">&#8592;</button>
+    <div style="text-align: center;">
+      <img id="modalImage" src="" alt="Expanded Preview">
+      <div id="modalInfo">
+        <h2 id="modalName"></h2>
+        <p><strong>Organization:</strong> <span id="modalOrg"></span></p>
+        <p><strong>Date:</strong> <span id="modalDate"></span></p>
+        
+        <p id="modalDesc"></p>
+      </div>
+    </div>
+    <button id="nextBtn" onclick="event.stopPropagation(); navigate(1)">&#8594;</button>
+  </div>
+
+
+
+
+  <footer>
+    <p>&copy; 2025 Sankalp Bhosale. All rights reserved.</p>
+  </footer>
+  <audio id="typeSound" src="https://assets.mixkit.co/active_storage/sfx/2333/2333-preview.mp3" preload="auto"></audio>
+  <script src="script.js"></script>
+  <script>
+    // Lightbox Logic
+    const modal = document.getElementById("imageModal");
+    const modalImg = document.getElementById("modalImage");
+    const modalName = document.getElementById("modalName");
+    const modalOrg = document.getElementById("modalOrg");
+    const modalDate = document.getElementById("modalDate");
+    const modalDesc = document.getElementById("modalDesc");
+
+    let currentIndex = 0;
+    let currentGroup = [];
+
+    function updateModalDetails(data) {
+      modalName.textContent = data.name || "";
+      modalOrg.textContent = data.org || "N/A";
+      modalDate.textContent = data.date || "N/A";
+      modalDesc.textContent = data.desc || "";
+    }
+
+    // Click on preview image to open modal
+    previewImages.addEventListener("click", (e) => {
+      if (e.target.tagName === "IMG") {
+        const allImgs = Array.from(previewImages.querySelectorAll("img"));
+        currentGroup = allImgs.map(img => {
+          const caption = img.nextElementSibling?.textContent || "";
+          return {
+            src: img.src,
+            alt: img.alt,
+            name: caption,
+            org: img.getAttribute("data-org"),
+            date: img.getAttribute("data-date"),
+            desc: img.getAttribute("data-desc")
+          };
+        });
+
+        currentIndex = allImgs.indexOf(e.target);
+        const data = currentGroup[currentIndex];
+        modalImg.src = data.src;
+        updateModalDetails(data);
+        modal.classList.add("active");
+      }
+    });
+
+    function navigate(direction) {
+      if (!currentGroup.length) return;
+
+      modalImg.classList.add("fade-out");
+
+      setTimeout(() => {
+        currentIndex = (currentIndex + direction + currentGroup.length) % currentGroup.length;
+        const newData = currentGroup[currentIndex];
+        modalImg.src = newData.src;
+        updateModalDetails(newData);
+        modalImg.classList.remove("fade-out");
+      }, 200);
+    }
+
+    function closeModal() {
+      modal.classList.remove("active");
+    }
+  </script>
+
 </body>
 
 </html>
