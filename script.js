@@ -1,4 +1,6 @@
+
 const typeSound = document.getElementById("typeSound");
+const f1Sound = document.getElementById("f1Sound");
 
 const bootLines = [
   "Booting...",
@@ -6,21 +8,71 @@ const bootLines = [
   "Establishing secure connection...",
   "Welcome."
 ];
+
 let bootIndex = 0;
 const bootText = document.getElementById("boot-text");
+
+// Reverse (outer to inner)
+const circles = [
+  document.querySelector(".layer4"),
+  document.querySelector(".layer3"),
+  document.querySelector(".layer2"),
+  document.querySelector(".layer1")
+];
 
 function showBootLine() {
   if (bootIndex < bootLines.length) {
     bootText.innerText = bootLines[bootIndex];
-    typeSound.play();
+
+    // Flicker effect
+    bootText.classList.add("boot-text-flicker");
+    setTimeout(() => {
+      bootText.classList.remove("boot-text-flicker");
+    }, 200);
+
+    // Typing sound
+    if (typeSound) {
+      typeSound.currentTime = 0;
+      typeSound.play();
+    }
+
+    if (circles[bootIndex]) {
+      circles[bootIndex].classList.add("circle-visible");
+    }
+
     bootIndex++;
-    setTimeout(showBootLine, 1000);
+    setTimeout(showBootLine, 1200);
   } else {
-    document.getElementById("boot-screen").style.display = "none";
+    // Fade out boot screen
+    const bootScreen = document.getElementById("boot-screen");
+    bootScreen.style.opacity = 0;
+
+    // F1 Sound
+    if (f1Sound) {
+      f1Sound.currentTime = 0;
+      f1Sound.play();
+    }
+
+    // Glow pulse
+    document.body.classList.add("reveal-glow");
+
+    setTimeout(() => {
+      bootScreen.style.display = "none";
+      document.body.style.overflow = "auto";
+      document.body.classList.remove("reveal-glow");
+    }, 1500);
+    const flash = document.getElementById("flashEffect");
+    flash.className = "particle-flash";
+    flash.style.display = "block";
+
+    setTimeout(() => {
+      flash.style.display = "none";
+    }, 1300); // match animation duration
   }
 }
 
-const nameText = "SANKALP BHOSALE";
+
+const nameText = "SANKALP VISHNU BHOSALE";
 let i = 0;
 function typeWriter() {
   if (i < nameText.length) {
@@ -32,7 +84,7 @@ function typeWriter() {
   }
 }
 
-const aboutText = "Detail-oriented cybersecurity intern with hands-on experience in red teaming, scripting, and offensive security. Creator of BruteMaster, a Bash and Python-based modular brute-force framework. Completed over 20 CTFs and labs focused on web vulnerabilities, authentication bypass, and exploitation. Seeking to leverage project-based learning and technical capabilities to grow in a cybersecurity internship role.";
+const aboutText = "****aDD PROPAR INTRO ****";
 let j = 0;
 function typeAbout() {
   if (j < aboutText.length) {
@@ -64,6 +116,22 @@ window.addEventListener('scroll', () => {
 });
 
 window.onload = function () {
+// Try unlocking autoplay using AudioContext and muted trick
+function unlockAudio(audio) {
+  try {
+    const ctx = new AudioContext();
+    const source = ctx.createBufferSource();
+    source.buffer = ctx.createBuffer(1, 1, 22050);
+    source.connect(ctx.destination);
+    source.start(0);
+    audio.play().catch(() => {});
+  } catch (e) {
+    console.warn("Audio unlock failed:", e);
+  }
+}
+unlockAudio(typeSound);
+unlockAudio(f1Sound);
+
   showBootLine();
   if (localStorage.getItem("theme") === "light") {
     document.body.classList.add("light");
@@ -72,8 +140,10 @@ window.onload = function () {
     typeWriter();
     setTimeout(typeAbout, 2000);
     revealOnScroll();
-  }, 4000);
+  }, 5000); // after boot completes
 };
+
+
 
 const cursor = document.getElementById("cursor");
 document.addEventListener("mousemove", (e) => {
