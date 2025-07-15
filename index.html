@@ -46,74 +46,142 @@
   <div id="flashEffect" style="display: none;"></div>
 
 
-  <button class="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
-
   <header>
     <h1 id="typewriter"></h1>
     <p>Aspiring Cybersecurity Professional | Student | Tech Enthusiast</p>
     <nav>
       <a href="#about">About</a>
-      <a href="project.html">Projects</a>
-      <a href="#resume">Resume</a>
+      <a href="#projects">Projects</a>
+      <a href="assets/Sankalp_Bhosale_Resume.pdf" target="_blank" rel="noopener noreferrer">
+        Resume <i class="fa fa-file-pdf-o"></i>
+      </a>
+
       <a href="#contact">Contact</a>
     </nav>
   </header>
 
   <!-- MAIN CONTENT -->
   <main class="main-section">
-
-    <section class="section" id="about">
-      <h2>About Me</h2>
-      <p>$ whoami<br>Sankalp Vishnu Bhosale</p>
-      <p class="type-line" id="aboutText"></p><span class="cursor">█</span>
+    <section class="section about-wrapper" id="about">
+      <div class="profile-photo">
+        <img src="assets/profile.png" alt="Sankalp Bhosale">
+      </div>
+      <div class="about-text">
+        <h2>About Me</h2>
+        <p>$ whoami<br>Sankalp Vishnu Bhosale</p>
+        <p class="type-line" id="aboutText"></p><span class="cursor">█</span>
+      </div>
     </section>
   </main>
-  </div>
 
-  
-  <div class="outer-frame">
-    <div class="custom-grid">
-      <div class="card skills">
-        
-        <div class="section-title">> Skills</div>
+  <!-- New Dashboard Grid -->
+  <div class="dashboard-wrapper" id="projects">
+
+    <!-- Left Column -->
+    <div class="side-box">
+      <div class="section-title">Web Vulnerability </div>
+      <div class="section-title">> Server-side </div>
+      <ul>
+        <li>SQL injection</li>
+        <li>Path traversal</li>
+        <li>File upload vulnerabilities</li>
+        <!-- <li>Responsive Design</li>
+        <li>DOM Manipulation</li> -->
+      </ul>
+      <div class="section-title">> Client-side </div>
+      <ul>
+        <li>Cross-site scripting</li>
+        <li>Cross-site request forgery (CSRF)</li>
+        <li>Clickjacking</li>
+        <!-- <li>Responsive Design</li>
+        <li>DOM Manipulation</li> -->
+      </ul>
+      <div class="section-title">> Web Tools </div>
+      <ul>
+        <li>Burp Suite</li>
+        <li>Wireshark</li>
+        <!-- <li>Clickjacking</li>
+        <li>Responsive Design</li>
+        <li>DOM Manipulation</li> -->
+      </ul>
+    </div>
+
+
+    <!-- Center Column -->
+    <div class="center-grid">
+      <div class="outer-frame">
+        <div class="custom-grid">
+
+          <div class="card skills">
+            <div class="section-title">> Skills</div>
+            <ul>
+              <li>SQL Injection</li>
+              <li>Burp Suite</li>
+              <li>Wireshark</li>
+              <li>Metasploit</li>
+              <li>Nmap</li>
+            </ul>
+          </div>
+
+
+          <div class="card projects">
+            <a href="#previewPanel"></a>
+            <div class="section-title">> Projects</div>
+
+            <p><strong>BruteMaster</strong> – A modular brute-force tool<br />
+
+              <a class="btn" href="https://github.com/sankalpvb/brutemaster" target="_blank">View Project</a>
+              <span class="project-tags">#Python</span>
+              <span class="project-tags">#Bash</span>
+              <span class="project-tags">#RedTeam</span>
+            </p>
+            </a>
+          </div>
+
+          
+
+          <div class="card certs">
+            <div class="section-title">> Certificates</div>
+            <p>Cybersecurity Fundamentals – IBM, Web Pentesting – TryHackMe, etc.</p>
+          </div>
+
+          <div class="card languages">
+            <div class="section-title">> Languages</div>
+            <ul>
+              <li>Python</li>
+              <li>Java</li>
+              <li>HTML/CSS</li>
+              <li>JavaScript</li>
+              <li>SQL</li>
+            </ul>
+          </div>
+
+        </div>
+        <div class="preview-panel" id="previewPanel">
+          <h3 id="previewTitle">Click on a section to view images</h3>
+          <div class="image-container" id="previewImages"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column -->
+    <div class="side-box">
+      <div class="section-title">> Progress</div>
+      <div class="progress-section">
+        <p>TryHackMe Profile:</p>
+        <iframe class="no-scroll-frame" src="https://tryhackme.com/api/v2/badges/public-profile?userPublicId=3399717"
+          loading="lazy" scrolling="no"></iframe>
+
+
         <ul>
-          <li>SQL Injection</li>
-          <li>Burp Suite</li>
-          <li>Wireshark</li>
-          <li>Metasploit</li>
-          <li>Nmap</li>
-        </ul>
-
-      </div>
-
-      <div class="card projects">
-        <div class="section-title">> Projects</div>
-        <p>BruteMaster – A modular brute-force tool using Bash and Python...</p>
-      </div>
-
-      <!-- Bottom Row -->
-      <div class="card certs">
-        <div class="section-title">> Certificates</div>
-        <p>Cybersecurity Fundamentals – IBM, Web Pentesting – TryHackMe, etc.</p>
-      </div>
-
-      <div class="card languages">
-        <div class="section-title">> Languages</div>
-        <ul>
-          <li>Python</li>
-          <li>Java</li>
-          <li>HTML/CSS</li>
-          <li>JavaScript</li>
-          <li>SQL</li>
+          <li>PortSwigger : <strong>42089 Rank</strong></li>
+          <li>Hack The Box: <strong>Newbie</strong></li>
         </ul>
       </div>
     </div>
-    <div class="preview-panel" id="previewPanel">
-      <h3 id="previewTitle">Click on a section to view images</h3>
-      <div class="image-container" id="previewImages">
-      </div>
-    </div>
+
   </div>
+
   <!-- Lightbox Modal with Navigation -->
   <div id="imageModal" onclick="closeModal()">
     <button id="prevBtn" onclick="event.stopPropagation(); navigate(-1)">&#8592;</button>

@@ -84,7 +84,7 @@ function typeWriter() {
   }
 }
 
-const aboutText = "****aDD PROPAR INTRO ****";
+const aboutText = "Cybersecurity enthusiast and MCA candidate at Parul University with hands-on experience in ethical hacking, vulnerability assessment, and automation scripting. Developed BruteMaster, a modular brute-force framework inspired by Metasploit, demonstrating strong skills in tool development and offensive security. Proficient in web application security, Linux-based tools, and scripting. Eager to contribute to real-world red team engagements and continuously grow within a dynamic cybersecurity environment.";
 let j = 0;
 function typeAbout() {
   if (j < aboutText.length) {
@@ -196,7 +196,7 @@ const imageMap = {
 
   projects: [
     {
-      src: "assets/brutemaster.png",
+      src: "assets/BruteMaster.png",
       alt: "BruteMaster",
       name: "BruteMaster",
       desc: "Custom tool for brute force testing login pages and services.",
