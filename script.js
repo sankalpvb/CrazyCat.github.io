@@ -377,3 +377,10 @@ function updateModalDetails(data) {
 function closeModal() {
   modal.classList.remove("active");
 }
+// Show sticky navbar after scroll
+window.addEventListener("scroll", () => {
+  const header = document.querySelector(".sticky-header");
+  if (window.scrollY > 20) {
+    header.classList.add("visible");
+  }
+});
