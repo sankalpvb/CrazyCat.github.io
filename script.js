@@ -1,4 +1,3 @@
-
 const typeSound = document.getElementById("typeSound");
 const f1Sound = document.getElementById("f1Sound");
 
@@ -101,36 +100,24 @@ function toggleTheme() {
   localStorage.setItem("theme", document.body.classList.contains("light") ? "light" : "dark");
 }
 
-const sections = document.querySelectorAll('.section');
-function revealOnScroll() {
-  sections.forEach(section => {
-    const rect = section.getBoundingClientRect();
-    if (rect.top < window.innerHeight - 100) {
-      section.classList.add('reveal');
-    }
-  });
-}
-window.addEventListener('scroll', () => {
-  revealOnScroll();
-  updateProgressBar();
-});
+// Removed old revealOnScroll() as IntersectionObserver will handle animations
 
 window.onload = function () {
-// Try unlocking autoplay using AudioContext and muted trick
-function unlockAudio(audio) {
-  try {
-    const ctx = new AudioContext();
-    const source = ctx.createBufferSource();
-    source.buffer = ctx.createBuffer(1, 1, 22050);
-    source.connect(ctx.destination);
-    source.start(0);
-    audio.play().catch(() => {});
-  } catch (e) {
-    console.warn("Audio unlock failed:", e);
+  // Try unlocking autoplay using AudioContext and muted trick
+  function unlockAudio(audio) {
+    try {
+      const ctx = new AudioContext();
+      const source = ctx.createBufferSource();
+      source.buffer = ctx.createBuffer(1, 1, 22050);
+      source.connect(ctx.destination);
+      source.start(0);
+      audio.play().catch(() => { });
+    } catch (e) {
+      console.warn("Audio unlock failed:", e);
+    }
   }
-}
-unlockAudio(typeSound);
-unlockAudio(f1Sound);
+  unlockAudio(typeSound);
+  unlockAudio(f1Sound);
 
   showBootLine();
   if (localStorage.getItem("theme") === "light") {
@@ -139,10 +126,25 @@ unlockAudio(f1Sound);
   setTimeout(() => {
     typeWriter();
     setTimeout(typeAbout, 2000);
-    revealOnScroll();
+    // Initial check for elements already in view on load (after boot screen fades)
+    // This is important because some elements might be visible before scrolling starts.
+    const animatedElementsOnLoad = document.querySelectorAll('.hide-before-animation');
+    animatedElementsOnLoad.forEach(element => {
+        if (element.getBoundingClientRect().top < window.innerHeight && !element.classList.contains('animated')) {
+             const animationClass = element.dataset.animation;
+             const delay = element.dataset.delay ? parseFloat(element.dataset.delay) * 1000 : 0;
+             setTimeout(() => {
+                 element.classList.remove('hide-before-animation');
+                 if (animationClass) {
+                     element.classList.add(animationClass);
+                 }
+             }, delay);
+             // No need to unobserve here, the observer will do it
+        }
+    });
+
   }, 5000); // after boot completes
 };
-
 
 
 const cursor = document.getElementById("cursor");
@@ -159,133 +161,217 @@ function updateProgressBar() {
 }
 
 document.addEventListener("keydown", () => {
-  typeSound.currentTime = 0;
-  typeSound.play();
+  if (typeSound) { // Check if typeSound is defined before trying to play
+    typeSound.currentTime = 0;
+    typeSound.play();
+  }
 });
 
 const imageMap = {
   skills: [
-    {
-      src: "assets/burp.png",
-      alt: "Burp Suite",
-      name: "Burp Suite",
-      desc: "Web vulnerability scanner and proxy tool used in penetration testing.",
-      org: "PortSwigger",
-      date: "Ongoing",
-      link: "https://portswigger.net/burp"
-    },
-    {
-      src: "assets/nmap.png",
-      alt: "Nmap",
-      name: "Nmap",
-      desc: "Network scanning tool for discovering hosts and services.",
-      org: "nmap.org",
-      date: "Ongoing",
-      link: "https://nmap.org/"
-    },
-    {
-      src: "assets/metasploit.png",
-      alt: "Metasploit",
-      name: "Metasploit",
-      desc: "Framework for developing and executing exploit code.",
-      org: "Rapid7",
-      date: "Ongoing",
-      link: "https://www.metasploit.com/"
-    }
+    // {
+    //   src: "assets/burp.png",
+    //   alt: "Burp Suite",
+    //   name: "Burp Suite",
+    //   desc: "Web vulnerability scanner and proxy tool used in penetration testing. Proficient in identifying various web application vulnerabilities.",
+    //   org: "PortSwigger",
+    //   date: "Ongoing",
+    //   link: "https://portswigger.net/burp",
+    //   technologies: ["Web Proxies", "Fuzzing", "Scanning"],
+    //   proficiency: "Advanced"
+    // },
+    // {
+    //   src: "assets/nmap.png",
+    //   alt: "Nmap",
+    //   name: "Nmap",
+    //   desc: "Network scanning tool for discovering hosts, services, and vulnerabilities. Used for reconnaissance and network mapping.",
+    //   org: "nmap.org",
+    //   date: "Ongoing",
+    //   link: "https://nmap.org/",
+    //   technologies: ["Port Scanning", "OS Detection", "Scripting"],
+    //   proficiency: "Proficient"
+    // },
+    // {
+    //   src: "assets/metasploit.png",
+    //   alt: "Metasploit",
+    //   name: "Metasploit Framework",
+    //   desc: "Powerful framework for developing, testing, and executing exploit code. Essential for penetration testing and red teaming.",
+    //   org: "Rapid7",
+    //   date: "Ongoing",
+    //   link: "https://www.metasploit.com/",
+    //   technologies: ["Exploitation", "Payload Generation", "Post-Exploitation"],
+    //   proficiency: "Intermediate"
+    // }
   ],
 
   projects: [
     {
-      src: "assets/BruteMaster.png",
+      src: "assets/BruteMaster.jpg",
       alt: "BruteMaster",
       name: "BruteMaster",
-      desc: "Custom tool for brute force testing login pages and services.",
+      desc: "Custom-built, modular brute-force framework inspired by Metasploit. Designed for testing login pages and services against dictionary attacks.",
       org: "Personal Project",
       date: "May 2025",
-      link: "#" // Replace with your GitHub/project URL
+      link: "https://github.com/sankalpvb/BruteMaster", // Assuming this is your actual GitHub link
+      technologies: ["Python", "Bash Scripting", "Networking", "Modular Design"],
+      challenges: "Implementing multi-threading for efficiency and handling various service protocols.",
+      // github: "https://github.com/sankalpvb/brutemaster",
+    },
+    {
+      src: "assets/Java.jpg",
+      alt: "Java Programming Language",
+      name: "Java",
+      desc: "Basic understanding of Object-Oriented Programming (OOP) concepts and application development.",
+      org: "Great Learning",
+      link: "https://www.mygreatlearning.com/certificate/HIDNTRDN",
+      proficiency: "Basic"
     }
   ],
 
   certs: [
     {
-      src: "assets/ibm.png",
-      alt: "IBM Certificate",
-      name: "Cybersecurity Fundamentals",
-      org: "IBM",
-      date: "June 2024",
-      desc: "Completed IBM Cybersecurity Fundamentals Course.",
-      link: "https://www.ibm.com/training/course/cybersecurity-fundamentals"
-    },
-    {
-      src: "assets/tryhackme.png",
-      alt: "TryHackMe",
-      name: "Web Pentesting",
+      src: "assets/THM_Pre_Security.png",
+      alt: "TryHackMe Web Pentesting",
+      name: "Web Pentesting Fundamentals",
       org: "TryHackMe",
       date: "March 2025",
-      desc: "Hands-on web pentesting labs & challenges.",
-      link: "https://tryhackme.com/room/webfundamentals"
+      desc: "Completed hands-on labs and challenges covering fundamental web penetration testing concepts and tools.",
+      link: "https://tryhackme.com/room/webfundamentals",
+      technologies: ["OWASP Top 10", "Burp Suite Basics", "HTTP/S"],
+    },
+    {
+      src: "assets/Coursera Foundations of Cybersecurity.png",
+      alt: "Google Cybersecurity Certificate",
+      name: "Foundations of Cybersecurity",
+      org: "Google via Coursera",
+      date: "July 2025",
+      desc: "Completed foundational cybersecurity training, covering core concepts, security principles, and industry best practices.",
+      link: "https://coursera.org/verify/google-foundations-cybersecurity", // Replace with your actual link
+      technologies: ["Security Fundamentals", "Risk Management", "Threat Landscape"],
+    },
+    {
+      src: "assets/Coursera Manage Security RIsks.png",
+      alt: "Google Cybersecurity Certificate",
+      name: "Manage Security Risks",
+      org: "Google via Coursera",
+      date: "July 2025",
+      desc: "Learned to identify, assess, and manage cybersecurity risks within an organizational context, including incident response planning.",
+      link: "https://coursera.org/verify/google-manage-security-risks", // Replace with your actual link
+      technologies: ["Risk Assessment", "Vulnerability Management", "Incident Response"],
+    },
+    {
+      src: "assets/Coursera Network and Netword Security.png",
+      alt: "Google Cybersecurity Certificate",
+      name: "Network and Network Security",
+      org: "Google via Coursera",
+      date: "July 2025",
+      desc: "Explored network protocols, secure network architectures, and common network security controls.",
+      link: "https://coursera.org/verify/google-network-security", // Replace with your actual link
+      technologies: ["TCP/IP", "Firewalls", "IDS/IPS", "VPNs"],
+    },
+    // {
+    //   src: "assets/google.png",
+    //   alt: "Google Cybersecurity Certificate",
+    //   name: "Tools of the Trade: Linux and SQL",
+    //   org: "Google via Coursera",
+    //   date: "July 2025",
+    //   desc: "Gained practical experience with Linux commands and SQL for security tasks, including data analysis and database security.",
+    //   link: "https://coursera.org/verify/google-linux-sql", // Replace with your actual link
+    //   technologies: ["Linux CLI", "SQL Queries", "Bash Scripting"],
+    // },
+    {
+      src: "assets/ECC-CEH-Certificate.png",
+      alt: "CEH Certification",
+      name: "Certified Ethical Hacker (CEH)",
+      org: "EC-Council",
+      date: "June 2025",
+      desc: "Earned CEH certification, demonstrating proficiency in ethical hacking methodologies, tools, and countermeasures across various attack vectors.",
+      link: "https://www.eccouncil.org/programs/certified-ethical-hacker-ceh/", // Replace with actual verification if available
+      technologies: ["Reconnaissance", "Scanning", "Exploitation", "Social Engineering", "Web Apps"],
     }
   ],
 
   languages: [
     {
       src: "assets/Java.jpg",
-      alt: "Java",
+      alt: "Java Programming Language",
       name: "Java",
-      desc: "Basic OOP's Concept.",
+      desc: "Basic understanding of Object-Oriented Programming (OOP) concepts and application development.",
       org: "Great Learning",
-      //date: "Ongoing",
-      link: "https://www.mygreatlearning.com/certificate/HIDNTRDN"
+      link: "https://www.mygreatlearning.com/certificate/HIDNTRDN",
+      proficiency: "Basic"
     },
     {
       src: "assets/PHP.jpg",
-      alt: "PHP",
+      alt: "PHP Programming Language",
       name: "PHP",
-      desc: "language used to structure web content and database connectivity.",
+      desc: "Proficient in using PHP for server-side scripting, dynamic web content generation, and database connectivity.",
       org: "Great Learning",
-      //date: "Ongoing",
-      link: "https://www.mygreatlearning.com/certificate/HMNSGLTX"
+      link: "https://www.mygreatlearning.com/certificate/HMNSGLTX",
+      proficiency: "Intermediate"
     },
     {
       src: "assets/DBMS.png",
       alt: "DBMS",
-      name: "DBMS",
-      desc: "System for managing databases and ensuring data integrity.",
+      name: "DBMS (Database Management Systems)",
+      desc: "Understanding of database concepts, SQL queries, data integrity, and database management principles.",
       org: "Great Learning",
-      //date: "Unknown",
-      //link: "https://en.wikipedia.org/wiki/Database_management_system"
+      proficiency: "Proficient"
     },
     {
       src: "assets/SE.jpg",
       alt: "Agile for Beginners",
       name: "Agile for Beginners",
-      desc: "Undustanding of actual devlopment process using Agile model",
+      desc: "Gained an understanding of Agile development methodologies, including Scrum and Kanban, for efficient project management.",
       org: "Great Learning",
-      //date: "Ongoing",
-      link: "https://www.mygreatlearning.com/certificate/MASGHQCR"
+      link: "https://www.mygreatlearning.com/certificate/MASGHQCR",
+      proficiency: "Basic"
     },
     {
       src: "assets/DS.jpg",
-      alt: "Data Structure",
-      name: "Data Structure in C",
-      desc: "Undustanding of how data structure works.",
+      alt: "Data Structure in C",
+      name: "Data Structures in C",
+      desc: "Fundamental understanding of data structures (arrays, linked lists, trees, graphs) and algorithms using the C programming language.",
       org: "Great Learning",
-      //date: "Ongoing",
-      link: "https://www.mygreatlearning.com/certificate/AXGKKPNA"
+      link: "https://www.mygreatlearning.com/certificate/AXGKKPNA",
+      proficiency: "Intermediate"
     }
   ]
 };
 
+
+const modal = document.getElementById("imageModal");
+const modalImg = document.getElementById("modalImage");
+const modalName = document.getElementById("modalName");
+const modalOrg = document.getElementById("modalOrg");
+const modalDate = document.getElementById("modalDate");
+const modalDesc = document.getElementById("modalDesc"); // This will now hold all dynamic content
+
+let currentIndex = 0;
+let currentGroup = [];
 
 document.addEventListener("DOMContentLoaded", () => {
   const sections = document.querySelectorAll(".card");
   const previewTitle = document.getElementById("previewTitle");
   const previewImages = document.getElementById("previewImages");
 
+  // Keep track of the currently active card
+  let activeCard = null;
+
   sections.forEach((section) => {
     section.addEventListener("click", () => {
-      const key = section.classList.contains("skills") ? "skills"
-        : section.classList.contains("projects") ? "projects"
+      // Remove 'active-card' from previously active card
+      if (activeCard) {
+        activeCard.classList.remove("active-card");
+      }
+
+      // Add 'active-card' to the clicked card
+      section.classList.add("active-card");
+      activeCard = section; // Set the current card as active
+
+      const key = 
+      // section.classList.contains("skills") ? "skills" : 
+      section.classList.contains("projects") ? "projects"
           : section.classList.contains("certs") ? "certs"
             : "languages";
 
@@ -295,15 +381,28 @@ document.addEventListener("DOMContentLoaded", () => {
       imageMap[key].forEach(img => {
         const container = document.createElement("div");
         container.style.textAlign = "center";
+        container.classList.add("preview-image-item"); // Add a class for styling
 
         const image = document.createElement("img");
         image.src = img.src;
         image.alt = img.alt;
+        // Store all necessary data as data attributes for the modal to pick up
+        image.setAttribute("data-name", img.name || "");
+        image.setAttribute("data-org", img.org || "");
+        image.setAttribute("data-date", img.date || "");
+        image.setAttribute("data-desc", img.desc || "");
+        image.setAttribute("data-link", img.link || "");
+        image.setAttribute("data-technologies", (img.technologies || []).join(", "));
+        image.setAttribute("data-proficiency", img.proficiency || "");
+        image.setAttribute("data-challenges", img.challenges || "");
+        image.setAttribute("data-github", img.github || "");
+        image.setAttribute("data-demo", img.demo || "");
+
 
         const caption = document.createElement("div");
         caption.style.color = "#00ffcc";
         caption.style.marginTop = "5px";
-        caption.textContent = img.alt;
+        caption.textContent = img.alt; // Display alt text as caption
 
         container.appendChild(image);
         container.appendChild(caption);
@@ -311,32 +410,71 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   });
+
+  document.getElementById("previewImages").addEventListener("click", (e) => {
+    if (e.target.tagName === "IMG") {
+      const clickedImg = e.target;
+      // Get all images currently displayed in the previewImages container
+      currentGroup = Array.from(document.querySelectorAll("#previewImages img")).map(img => {
+        return {
+          src: img.src,
+          alt: img.alt,
+          name: img.getAttribute("data-name"),
+          org: img.getAttribute("data-org"),
+          date: img.getAttribute("data-date"),
+          desc: img.getAttribute("data-desc"),
+          link: img.getAttribute("data-link"),
+          // Split string back into array for technologies
+          technologies: img.getAttribute("data-technologies") ? img.getAttribute("data-technologies").split(', ') : [],
+          proficiency: img.getAttribute("data-proficiency"),
+          challenges: img.getAttribute("data-challenges"),
+          github: img.getAttribute("data-github"),
+          demo: img.getAttribute("data-demo")
+        };
+      });
+
+      currentIndex = Array.from(document.querySelectorAll("#previewImages img")).indexOf(clickedImg);
+      const data = currentGroup[currentIndex];
+      modalImg.src = data.src;
+      updateModalDetails(data);
+      modal.classList.add("active");
+    }
+  });
+
+  // --- New: Intersection Observer for On-Scroll Animations ---
+  const animatedElements = document.querySelectorAll('.hide-before-animation');
+
+  const observerOptions = {
+      root: null, // Observing changes in the viewport
+      rootMargin: '0px',
+      threshold: 0.1 // When 10% of the element is visible
+  };
+
+  const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+          if (entry.isIntersecting) {
+              const element = entry.target;
+              const animationClass = element.dataset.animation;
+              const delay = element.dataset.delay ? parseFloat(element.dataset.delay) * 1000 : 0; // Convert to ms
+
+              setTimeout(() => {
+                  element.classList.remove('hide-before-animation'); // Remove initial hidden state
+                  if (animationClass) {
+                      element.classList.add(animationClass); // Add the specific animation class
+                  }
+              }, delay);
+
+              observer.unobserve(element); // Stop observing once animated
+          }
+      });
+  }, observerOptions);
+
+  animatedElements.forEach(element => {
+      observer.observe(element);
+  });
+
 });
 
-const modal = document.getElementById("imageModal");
-const modalImg = document.getElementById("modalImage");
-const modalName = document.getElementById("modalName");
-const modalOrg = document.getElementById("modalOrg");
-const modalDate = document.getElementById("modalDate");
-const modalDesc = document.getElementById("modalDesc");
-
-let currentIndex = 0;
-let currentGroup = [];
-
-document.getElementById("previewImages").addEventListener("click", (e) => {
-  if (e.target.tagName === "IMG") {
-    const src = e.target.src;
-    const allImageData = Object.values(imageMap).flat();
-    const clickedData = allImageData.find(img => src.includes(img.src));
-    currentGroup = allImageData.filter(img => [...document.querySelectorAll("#previewImages img")].some(i => i.src.includes(img.src)));
-
-    currentIndex = currentGroup.findIndex(img => src.includes(img.src));
-
-    updateModalDetails(clickedData);
-    modalImg.src = clickedData.src;
-    modal.classList.add("active");
-  }
-});
 
 function navigate(direction) {
   if (currentGroup.length === 0) return;
@@ -357,20 +495,54 @@ function updateModalDetails(data) {
   modalOrg.textContent = data.org || "N/A";
   modalDate.textContent = data.date || "Unknown";
 
-  // Reset description
-  modalDesc.textContent = data.desc || "";
+  modalDesc.innerHTML = ""; // Clear previous content
+  if (data.desc) {
+    modalDesc.innerHTML += `<p>${data.desc}</p>`;
+  }
 
-  // Add clickable link if exists
+  // Add Technologies
+  if (data.technologies && data.technologies.length > 0) {
+    modalDesc.innerHTML += `<p><strong>Technologies:</strong> ${data.technologies.join(", ")}</p>`;
+  }
+
+  // Add Proficiency (if applicable, e.g., for skills/languages)
+  if (data.proficiency) {
+    modalDesc.innerHTML += `<p><strong>Proficiency:</strong> ${data.proficiency}</p>`;
+  }
+
+  // Add Challenges (if applicable, e.g., for projects)
+  if (data.challenges) {
+    modalDesc.innerHTML += `<p><strong>Challenges:</strong> ${data.challenges}</p>`;
+  }
+
+  // Add clickable links (main link, GitHub, Demo)
   if (data.link) {
-    const linkEl = document.createElement("a");
-    linkEl.href = data.link;
-    linkEl.textContent = data.link;
-    linkEl.target = "_blank";
-    linkEl.style.color = "#00ffcc";
-    linkEl.style.display = "inline-block";
-    linkEl.style.marginTop = "10px";
-    modalDesc.appendChild(document.createElement("br"));
-    modalDesc.appendChild(linkEl);
+    const mainLinkEl = document.createElement("a");
+    mainLinkEl.href = data.link;
+    mainLinkEl.textContent = "View Details";
+    mainLinkEl.target = "_blank";
+    mainLinkEl.style.color = "#00ffcc";
+    mainLinkEl.style.display = "block";
+    mainLinkEl.style.marginTop = "10px";
+    modalDesc.appendChild(mainLinkEl);
+  }
+  if (data.github) {
+    const githubLinkEl = document.createElement("a");
+    githubLinkEl.href = data.github;
+    githubLinkEl.textContent = "GitHub Repository";
+    githubLinkEl.target = "_blank";
+    githubLinkEl.style.color = "#00ffff"; // Different color for GitHub
+    mainLinkEl.style.display = "block"; // Changed to block for layout
+    modalDesc.appendChild(githubLinkEl);
+  }
+  if (data.demo && data.demo !== "#") { // Only show if a valid demo link exists
+    const demoLinkEl = document.createElement("a");
+    demoLinkEl.href = data.demo;
+    demoLinkEl.textContent = "Live Demo/Video";
+    demoLinkEl.target = "_blank";
+    demoLinkEl.style.color = "#ff66ff"; // Different color for Demo
+    demoLinkEl.style.display = "block"; // Changed to block for layout
+    modalDesc.appendChild(demoLinkEl);
   }
 }
 
@@ -382,5 +554,7 @@ window.addEventListener("scroll", () => {
   const header = document.querySelector(".sticky-header");
   if (window.scrollY > 20) {
     header.classList.add("visible");
+  } else {
+    header.classList.remove("visible"); // Hide if scrolled back to top
   }
 });
