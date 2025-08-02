@@ -217,17 +217,6 @@ const imageMap = {
       challenges: "Implementing multi-threading for efficiency and handling various service protocols.",
       // github: "https://github.com/sankalpvb/brutemaster",
     },
-    {
-      src: "assets/Java.jpg",
-      alt: "Java Programming Language",
-      name: "Java",
-      desc: "Basic understanding of Object-Oriented Programming (OOP) concepts and application development.",
-      org: "Great Learning",
-      link: "https://www.mygreatlearning.com/certificate/HIDNTRDN",
-      proficiency: "Basic"
-    }
-  ],
-
   certs: [
     {
       src: "assets/THM_Pre_Security.png",
@@ -557,4 +546,5 @@ window.addEventListener("scroll", () => {
   } else {
     header.classList.remove("visible"); // Hide if scrolled back to top
   }
+
 });
