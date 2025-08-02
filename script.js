@@ -219,14 +219,14 @@ const imageMap = {
     },
   certs: [
     {
-      src: "assets/THM_Pre_Security.png",
-      alt: "TryHackMe Web Pentesting",
-      name: "Web Pentesting Fundamentals",
-      org: "TryHackMe",
-      date: "March 2025",
-      desc: "Completed hands-on labs and challenges covering fundamental web penetration testing concepts and tools.",
-      link: "https://tryhackme.com/room/webfundamentals",
-      technologies: ["OWASP Top 10", "Burp Suite Basics", "HTTP/S"],
+      src: "assets/ECC-CEH-Certificate.png",
+      alt: "CEH Certification",
+      name: "Certified Ethical Hacker (CEH)",
+      org: "EC-Council",
+      date: "June 2025",
+      desc: "Earned CEH certification, demonstrating proficiency in ethical hacking methodologies, tools, and countermeasures across various attack vectors.",
+      link: "https://www.eccouncil.org/programs/certified-ethical-hacker-ceh/", // Replace with actual verification if available
+      technologies: ["Reconnaissance", "Scanning", "Exploitation", "Social Engineering", "Web Apps"],
     },
     {
       src: "assets/Coursera Foundations of Cybersecurity.png",
@@ -269,14 +269,14 @@ const imageMap = {
     //   technologies: ["Linux CLI", "SQL Queries", "Bash Scripting"],
     // },
     {
-      src: "assets/ECC-CEH-Certificate.png",
-      alt: "CEH Certification",
-      name: "Certified Ethical Hacker (CEH)",
-      org: "EC-Council",
-      date: "June 2025",
-      desc: "Earned CEH certification, demonstrating proficiency in ethical hacking methodologies, tools, and countermeasures across various attack vectors.",
-      link: "https://www.eccouncil.org/programs/certified-ethical-hacker-ceh/", // Replace with actual verification if available
-      technologies: ["Reconnaissance", "Scanning", "Exploitation", "Social Engineering", "Web Apps"],
+      src: "assets/THM_Pre_Security.png",
+      alt: "TryHackMe Web Pentesting",
+      name: "Web Pentesting Fundamentals",
+      org: "TryHackMe",
+      date: "March 2025",
+      desc: "Completed hands-on labs and challenges covering fundamental web penetration testing concepts and tools.",
+      link: "https://tryhackme.com/room/webfundamentals",
+      technologies: ["OWASP Top 10", "Burp Suite Basics", "HTTP/S"],
     }
   ],
 
@@ -548,3 +548,4 @@ window.addEventListener("scroll", () => {
   }
 
 });
+
