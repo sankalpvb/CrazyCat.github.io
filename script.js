@@ -216,7 +216,8 @@ const imageMap = {
       technologies: ["Python", "Bash Scripting", "Networking", "Modular Design"],
       challenges: "Implementing multi-threading for efficiency and handling various service protocols.",
       // github: "https://github.com/sankalpvb/brutemaster",
-    },
+    }
+    ],
   certs: [
     {
       src: "assets/ECC-CEH-Certificate.png",
@@ -548,4 +549,5 @@ window.addEventListener("scroll", () => {
   }
 
 });
+
 
